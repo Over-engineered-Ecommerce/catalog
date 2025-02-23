@@ -22,23 +22,23 @@
 
     <dependencies>
 
-        <!-- Spring actuator -->
+        <!-- Test Containers -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-
-        <!-- Spring Test -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>1.20.4</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>
+
+
+
+
 
         <!-- Rest Assure -->
         <dependency>
@@ -47,7 +47,7 @@
             <version>5.5.0</version>
         </dependency>
 
-        <!-- Project -->
+        <!-- Projects -->
         <dependency>
             <groupId>com.Over-engineered-Ecommerce</groupId>
             <artifactId>transport</artifactId>
@@ -58,6 +58,18 @@
 
     <build>
         <plugins>
+            <!-- Surefire Plugin for Unit Tests -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.2</version>
+                <configuration>
+                    <includes>
+                        <include>**/*Test.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
+
             <!-- Failsafe Plugin for Integration Tests -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

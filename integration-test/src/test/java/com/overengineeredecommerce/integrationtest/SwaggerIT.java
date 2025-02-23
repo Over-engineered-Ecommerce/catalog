@@ -1,15 +1,16 @@
 package com.overengineeredecommerce.integrationtest;
 
-import com.github.dockerjava.zerodep.shaded.org.apache.hc.core5.http.HttpStatus;
+import com.overengineeredecommerce.integrationtest.setup.Postgres;
 import com.overengineeredecommerce.transport.Application;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.HttpStatus;
 
 @SpringBootTest(classes = Application.class,  webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class SwaggerIT {
+public class SwaggerIT extends Postgres {
 
     private String BASE_URL;
 
@@ -25,6 +26,6 @@ public class SwaggerIT {
     public void givenWeHaveApiDocumentationThenReturnOK() {
         RestAssured.get(BASE_URL)
                 .then()
-                .statusCode(HttpStatus.SC_OK);
+                .statusCode(HttpStatus.OK.value());
     }
 }
