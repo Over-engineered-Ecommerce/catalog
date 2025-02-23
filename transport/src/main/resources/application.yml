@@ -1,0 +1,25 @@
+# Server
+server:
+  servlet:
+    context-path: /catalog
+
+# Swagger
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    url: /v3/api-docs
+  show-actuator: true
+
+# actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: liveness, readiness, health
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
