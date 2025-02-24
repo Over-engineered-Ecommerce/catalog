@@ -1,7 +1,7 @@
 package com.overengineeredecommerce.transport.service;
 
 
-import com.overengineeredecommerce.transport.model.Category;
+import com.overengineeredecommerce.domain.entity.Category;
 import com.overengineeredecommerce.transport.repository.CategoryRepository;
 import org.springframework.stereotype.Service;
 

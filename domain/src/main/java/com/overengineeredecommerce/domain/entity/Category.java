@@ -1,4 +1,4 @@
-package com.overengineeredecommerce.transport.model;
+package com.overengineeredecommerce.domain.entity;
 
 
 import jakarta.persistence.*;
