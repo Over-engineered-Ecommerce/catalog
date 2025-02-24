@@ -36,10 +36,6 @@
             <scope>test</scope>
         </dependency>
 
-
-
-
-
         <!-- Rest Assure -->
         <dependency>
             <groupId>io.rest-assured</groupId>
