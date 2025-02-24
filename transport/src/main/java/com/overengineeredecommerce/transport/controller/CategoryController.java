@@ -1,7 +1,8 @@
 package com.overengineeredecommerce.transport.controller;
 
 
-import com.overengineeredecommerce.transport.model.Category;
+
+import com.overengineeredecommerce.domain.entity.Category;
 import com.overengineeredecommerce.transport.service.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;

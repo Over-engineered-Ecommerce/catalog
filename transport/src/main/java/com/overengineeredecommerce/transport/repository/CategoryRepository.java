@@ -1,6 +1,6 @@
 package com.overengineeredecommerce.transport.repository;
 
-import com.overengineeredecommerce.transport.model.Category;
+import com.overengineeredecommerce.domain.entity.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

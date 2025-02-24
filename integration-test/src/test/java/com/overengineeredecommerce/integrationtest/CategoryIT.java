@@ -1,8 +1,9 @@
 package com.overengineeredecommerce.integrationtest;
 
+import com.overengineeredecommerce.domain.entity.Category;
 import com.overengineeredecommerce.integrationtest.setup.Postgres;
 import com.overengineeredecommerce.transport.Application;
-import com.overengineeredecommerce.transport.model.Category;
+
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.ExtractableResponse;
