@@ -12,19 +12,19 @@ import org.springframework.http.HttpStatus;
 @SpringBootTest(classes = Application.class,  webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class SwaggerIT extends Postgres {
 
-    private String BASE_URL;
+    private String baseUrl;
 
     @LocalServerPort
     private int port;
 
     @BeforeEach
-    public void setUp() {
-        BASE_URL = "http://localhost:" + port + "/catalog/v3/api-docs";
+    void setUp() {
+        baseUrl = "http://localhost:" + port + "/catalog/v3/api-docs";
     }
 
     @Test
-    public void givenWeHaveApiDocumentationThenReturnOK() {
-        RestAssured.get(BASE_URL)
+    void givenWeHaveApiDocumentationThenReturnOK() {
+        RestAssured.get(baseUrl)
                 .then()
                 .statusCode(HttpStatus.OK.value());
     }

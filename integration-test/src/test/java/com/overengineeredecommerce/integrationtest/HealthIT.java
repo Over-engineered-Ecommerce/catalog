@@ -22,12 +22,12 @@ class HealthIT extends Postgres {
     private static String BASE_URL;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         BASE_URL = "http://localhost:" + port + "/catalog/actuator/health";
     }
 
     @Test
-    public void testHealth() {
+    void testHealth() {
         RestAssured.get(BASE_URL)
                 .then()
                 .statusCode(HttpStatus.OK.value())
@@ -36,7 +36,7 @@ class HealthIT extends Postgres {
     }
 
     @Test
-    public void testLiveness() {
+    void testLiveness() {
         RestAssured.get(BASE_URL + "/liveness")
                 .then()
                 .statusCode(HttpStatus.OK.value())
@@ -45,7 +45,7 @@ class HealthIT extends Postgres {
     }
 
     @Test
-    public void testReadiness() {
+    void testReadiness() {
 
         RestAssured.get(BASE_URL + "/readiness")
                 .then()

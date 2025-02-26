@@ -25,18 +25,17 @@ class CategoryIT extends Postgres {
     @LocalServerPort
     private int port;
 
-    private static String BASE_URL;
+    private static String baseUrl;
 
 
     @BeforeEach
     void setUp() {
-
-        BASE_URL = "http://localhost:" + port + "/catalog";
+        baseUrl = "http://localhost:" + port + "/catalog";
     }
 
     @Test
     void getAllCategories() {
-        RestAssured.get(BASE_URL + "/categories")
+        RestAssured.get(baseUrl + "/categories")
                 .then()
                 .statusCode(HttpStatus.OK.value())
                 .contentType(ContentType.JSON) // Ensures the response is valid JSON
@@ -51,7 +50,7 @@ class CategoryIT extends Postgres {
         RestAssured.given()
                 .contentType(ContentType.JSON)
                 .body(invalidPayload)
-                .post(BASE_URL + "/category")
+                .post(baseUrl + "/category")
                 .then()
                 .statusCode(HttpStatus.BAD_REQUEST.value())
                 .contentType(ContentType.JSON)
@@ -66,7 +65,7 @@ class CategoryIT extends Postgres {
         CategoryResponseDto category = RestAssured.given()
                 .contentType(ContentType.JSON)
                 .body(payload)
-                .post(BASE_URL + "/category")
+                .post(baseUrl + "/category")
                 .then()
                 .statusCode(HttpStatus.OK.value())
                 .contentType(ContentType.JSON)
@@ -79,7 +78,7 @@ class CategoryIT extends Postgres {
         log.info("category: " + category);
 
 
-        RestAssured.get(BASE_URL + "/categories")
+        RestAssured.get(baseUrl + "/categories")
                 .then()
                 .statusCode(HttpStatus.OK.value())
                 .contentType(ContentType.JSON) // Ensures the response is valid JSON
@@ -89,7 +88,7 @@ class CategoryIT extends Postgres {
 
         RestAssured.given()
                 .queryParam("id", category.id())
-                .get(BASE_URL + "/category")
+                .get(baseUrl + "/category")
                 .then()
                 .statusCode(HttpStatus.OK.value())
                 .contentType(ContentType.JSON)
@@ -99,7 +98,7 @@ class CategoryIT extends Postgres {
 
         RestAssured.given()
                 .queryParam("name", category.name())
-                .get(BASE_URL + "/category/byName")
+                .get(baseUrl + "/category/byName")
                 .then()
                 .statusCode(HttpStatus.OK.value())
                 .contentType(ContentType.JSON)
