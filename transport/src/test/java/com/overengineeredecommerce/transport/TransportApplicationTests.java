@@ -8,6 +8,8 @@ class TransportApplicationTests {
 
 	@Test
 	void contextLoads() {
+		// This test is empty because it is not yet necessary to test the context load.
+
 	}
 
 }

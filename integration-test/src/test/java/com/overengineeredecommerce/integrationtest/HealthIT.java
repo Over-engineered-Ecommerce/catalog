@@ -19,16 +19,16 @@ class HealthIT extends Postgres {
     @LocalServerPort
     private int port;
 
-    private static String BASE_URL;
+    private static String baseUrl;
 
     @BeforeEach
     void setUp() {
-        BASE_URL = "http://localhost:" + port + "/catalog/actuator/health";
+        baseUrl = "http://localhost:" + port + "/catalog/actuator/health";
     }
 
     @Test
     void testHealth() {
-        RestAssured.get(BASE_URL)
+        RestAssured.get(baseUrl)
                 .then()
                 .statusCode(HttpStatus.OK.value())
                 .contentType(ContentType.JSON) // Ensures the response is valid JSON
@@ -37,7 +37,7 @@ class HealthIT extends Postgres {
 
     @Test
     void testLiveness() {
-        RestAssured.get(BASE_URL + "/liveness")
+        RestAssured.get(baseUrl + "/liveness")
                 .then()
                 .statusCode(HttpStatus.OK.value())
                 .contentType(ContentType.JSON) // Ensures the response is valid JSON
@@ -47,7 +47,7 @@ class HealthIT extends Postgres {
     @Test
     void testReadiness() {
 
-        RestAssured.get(BASE_URL + "/readiness")
+        RestAssured.get(baseUrl + "/readiness")
                 .then()
                 .statusCode(HttpStatus.OK.value())
                 .contentType(ContentType.JSON) // Ensures the response is valid JSON
