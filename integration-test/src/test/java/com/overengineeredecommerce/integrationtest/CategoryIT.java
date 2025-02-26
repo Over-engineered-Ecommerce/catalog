@@ -29,13 +29,13 @@ class CategoryIT extends Postgres {
 
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
 
         BASE_URL = "http://localhost:" + port + "/catalog";
     }
 
     @Test
-    public void getAllCategories() {
+    void getAllCategories() {
         RestAssured.get(BASE_URL + "/categories")
                 .then()
                 .statusCode(HttpStatus.OK.value())
@@ -44,7 +44,7 @@ class CategoryIT extends Postgres {
     }
 
     @Test
-    public void failToCreateCategory() {
+    void failToCreateCategory() {
         CategoryRequestDto invalidPayload = new CategoryRequestDto("in");
 
 
@@ -60,7 +60,7 @@ class CategoryIT extends Postgres {
     }
 
     @Test
-    public void createCategory() {
+    void createCategory() {
         CategoryRequestDto payload = new CategoryRequestDto("Informática");
 
         CategoryResponseDto category = RestAssured.given()
