@@ -14,7 +14,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 
 
 @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class HealthIT extends Postgres {
+class HealthIT extends Postgres {
 
     @LocalServerPort
     private int port;

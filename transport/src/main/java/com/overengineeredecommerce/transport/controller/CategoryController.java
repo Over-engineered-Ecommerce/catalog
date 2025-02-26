@@ -3,8 +3,11 @@ package com.overengineeredecommerce.transport.controller;
 
 
 import com.overengineeredecommerce.domain.entity.Category;
+import com.overengineeredecommerce.transport.CategoryMapper;
+import com.overengineeredecommerce.transport.dto.CategoryRequestDto;
 import com.overengineeredecommerce.transport.service.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,9 +48,11 @@ public class CategoryController {
 
     @Operation(summary = "Create a new category")
     @PostMapping("/category")
-    public ResponseEntity<?> createCategory(@RequestBody Category category) {
+    public ResponseEntity<?> createCategory(@RequestBody @Valid CategoryRequestDto request) {
 
+        Category category = CategoryMapper.INSTANCE.toCategory(request);
         Category categoryResponse = categoryService.createCategory(category);
-        return ResponseEntity.ok(categoryResponse);
+
+        return ResponseEntity.ok(CategoryMapper.INSTANCE.fromCategory(categoryResponse));
     }
 }

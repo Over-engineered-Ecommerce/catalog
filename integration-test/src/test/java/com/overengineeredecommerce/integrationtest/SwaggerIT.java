@@ -10,7 +10,7 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 
 @SpringBootTest(classes = Application.class,  webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class SwaggerIT extends Postgres {
+class SwaggerIT extends Postgres {
 
     private String BASE_URL;
 

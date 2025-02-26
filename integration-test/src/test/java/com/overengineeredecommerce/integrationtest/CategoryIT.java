@@ -1,13 +1,12 @@
 package com.overengineeredecommerce.integrationtest;
 
-import com.overengineeredecommerce.domain.entity.Category;
 import com.overengineeredecommerce.integrationtest.setup.Postgres;
 import com.overengineeredecommerce.transport.Application;
-
+import com.overengineeredecommerce.transport.dto.CategoryRequestDto;
+import com.overengineeredecommerce.transport.dto.CategoryResponseDto;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import io.restassured.response.ExtractableResponse;
-import io.restassured.response.Response;
+import lombok.extern.slf4j.Slf4j;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,8 +18,9 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 
+@Slf4j
 @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class CategoryIT extends Postgres {
+class CategoryIT extends Postgres {
 
     @LocalServerPort
     private int port;
@@ -44,10 +44,26 @@ public class CategoryIT extends Postgres {
     }
 
     @Test
-    public void createCategory() {
-        Category payload = new Category("Informática");
+    public void failToCreateCategory() {
+        CategoryRequestDto invalidPayload = new CategoryRequestDto("in");
 
-        ExtractableResponse<Response> response = RestAssured.given()
+
+        RestAssured.given()
+                .contentType(ContentType.JSON)
+                .body(invalidPayload)
+                .post(BASE_URL + "/category")
+                .then()
+                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .contentType(ContentType.JSON)
+                .body("name", equalTo("Please inform a name between 3 and 100 characters."));
+
+    }
+
+    @Test
+    public void createCategory() {
+        CategoryRequestDto payload = new CategoryRequestDto("Informática");
+
+        CategoryResponseDto category = RestAssured.given()
                 .contentType(ContentType.JSON)
                 .body(payload)
                 .post(BASE_URL + "/category")
@@ -56,9 +72,11 @@ public class CategoryIT extends Postgres {
                 .contentType(ContentType.JSON)
                 .body("name", equalTo("Informática"))
                 .body("id", notNullValue())
-                .extract();
+                .extract().
+                as(CategoryResponseDto.class);
 
-        Category category = response.as(Category.class);
+
+        log.info("category: " + category);
 
 
         RestAssured.get(BASE_URL + "/categories")
@@ -67,27 +85,27 @@ public class CategoryIT extends Postgres {
                 .contentType(ContentType.JSON) // Ensures the response is valid JSON
                 .body("size()", equalTo(1))
                 .body("find { it.name == 'Informática' }.name", Matchers.equalTo("Informática"))
-                .body("find { it.name == 'Informática' }.id", equalTo(category.getId().toString()));
+                .body("find { it.name == 'Informática' }.id", equalTo(category.id().toString()));
 
         RestAssured.given()
-                .queryParam("id", category.getId())
+                .queryParam("id", category.id())
                 .get(BASE_URL + "/category")
                 .then()
                 .statusCode(HttpStatus.OK.value())
                 .contentType(ContentType.JSON)
                 // Ensures the response is valid JSON
                 .body("name", equalTo("Informática"))
-                .body("id", equalTo(category.getId().toString()));
+                .body("id", equalTo(category.id().toString()));
 
         RestAssured.given()
-                .queryParam("name", category.getName())
+                .queryParam("name", category.name())
                 .get(BASE_URL + "/category/byName")
                 .then()
                 .statusCode(HttpStatus.OK.value())
                 .contentType(ContentType.JSON)
                 // Ensures the response is valid JSON
                 .body("name", equalTo("Informática"))
-                .body("id", equalTo(category.getId().toString()));
+                .body("id", equalTo(category.id().toString()));
     }
 
 }
