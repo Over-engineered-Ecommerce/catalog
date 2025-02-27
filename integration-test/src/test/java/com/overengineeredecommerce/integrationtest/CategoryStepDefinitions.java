@@ -2,6 +2,7 @@ package com.overengineeredecommerce.integrationtest;
 
 import com.overengineeredecommerce.integrationtest.setup.cucumber.TestContext;
 import com.overengineeredecommerce.transport.dto.CategoryRequestDto;
+import com.overengineeredecommerce.transport.dto.CategoryResponseDto;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
@@ -11,6 +12,8 @@ import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 import org.hamcrest.Matchers;
 import org.springframework.http.HttpStatus;
+
+import java.util.UUID;
 
 
 public class CategoryStepDefinitions {
@@ -33,13 +36,13 @@ public class CategoryStepDefinitions {
 
     @Given("a request to create a category called {string}")
     public void aRequestToCreateACategoryCalled(String categoryName) {
-        ValidatableResponse validatableResponse = RestAssured.given()
+        ValidatableResponse response = RestAssured.given()
                 .contentType(ContentType.JSON)
                 .body(new CategoryRequestDto(categoryName))
                 .post(StepDefinitions.getBaseUrl() + "/category")
                 .then();
 
-        testContext.setResponse(validatableResponse);
+        testContext.setResponse(response);
     }
 
     @And("the response should contain a category {string}")
@@ -48,9 +51,14 @@ public class CategoryStepDefinitions {
     }
 
 
-    @Given("a category informática exits")
-    public void aCategoryInformaticaExits() {
-        // This method is just a placeholder to make the scenario more readable
+    @Given("a category {string} exits")
+    public void aCategoryExits(String categoryName) {
+        ValidatableResponse response = RestAssured
+                .given()
+                .queryParam("name", categoryName)
+                .get(StepDefinitions.getBaseUrl() + "/category/byName").then();
+
+        testContext.setResponse(response);
     }
 
     @And("the response should contain {string}")
@@ -65,5 +73,25 @@ public class CategoryStepDefinitions {
                 .queryParam("name", categoryName)
                 .get(StepDefinitions.getBaseUrl() + "/category/byName");
         testContext.setResponse(response.then());
+    }
+
+    @When("a request to delete category with id {string}")
+    public void aRequestToDeleteCategoryWithId(String id) {
+        ValidatableResponse response = RestAssured
+                .given()
+                .queryParam("id", id)
+                .delete(StepDefinitions.getBaseUrl() + "/category").then();
+        testContext.setResponse(response);
+    }
+
+    @When("a request to delete the category")
+    public void aRequestToDeleteTheCategory() {
+        UUID id = testContext.getResponse().extract().as(CategoryResponseDto.class).id();
+
+        ValidatableResponse response = RestAssured
+                .given()
+                .queryParam("id", id)
+                .delete(StepDefinitions.getBaseUrl() + "/category").then();
+        testContext.setResponse(response);
     }
 }

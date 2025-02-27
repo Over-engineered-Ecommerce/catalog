@@ -29,15 +29,16 @@ public class ExceptionControllerHandler {
         return ResponseEntity.badRequest().body(mountError(ex));
     }
 
-    @ExceptionHandler(value = NoHandlerFoundException.class)
+    @ExceptionHandler( {NoHandlerFoundException.class, NotFound.class })
     private ResponseEntity<Map<String, String>> notFound(Exception ex, WebRequest request) {
-        return ResponseEntity.badRequest().body(mountError(ex));
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(mountError(ex));
     }
 
     @ExceptionHandler(value = UniqueInsertConstraint.class)
     private ResponseEntity<Map<String, String>> duplication(Exception ex, WebRequest request) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(mountError(ex));
     }
+
 
     @ExceptionHandler(value = InternalError.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)

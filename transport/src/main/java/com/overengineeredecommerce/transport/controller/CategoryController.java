@@ -39,12 +39,19 @@ public class CategoryController {
         return ResponseEntity.ok(categoryResponse);
     }
 
+    @Operation(summary = "Delete category by Id")
+    @DeleteMapping("/category")
+    public ResponseEntity<?> deleteCategoryById(@RequestParam UUID id) {
+        categoryService.deleteCategoryById(id);
+        return ResponseEntity.noContent().build();
+    }
+
     @Operation(summary = "Get category by Name")
     @GetMapping("/category/byName")
     public ResponseEntity<?> getCategoryByName(@RequestParam String name) {
 
         Category categoryResponse = categoryService.getCategoryByName(name);
-        return ResponseEntity.ok(categoryResponse);
+        return ResponseEntity.ok(CategoryMapper.INSTANCE.fromCategory(categoryResponse));
     }
 
     @Operation(summary = "Create a new category")
@@ -56,4 +63,7 @@ public class CategoryController {
 
         return ResponseEntity.created(URI.create("")).body(CategoryMapper.INSTANCE.fromCategory(categoryResponse));
     }
+
+
+
 }

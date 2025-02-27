@@ -2,9 +2,12 @@ package com.overengineeredecommerce.transport.service;
 
 
 import com.overengineeredecommerce.domain.entity.Category;
+import com.overengineeredecommerce.transport.exception.NotFound;
 import com.overengineeredecommerce.transport.exception.UniqueInsertConstraint;
 import com.overengineeredecommerce.transport.repository.CategoryRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.UUID;
@@ -35,6 +38,15 @@ public class CategoryService {
     }
 
     public Category getCategoryByName(String name) {
-        return categoryRepository.getCategoryByName(name).orElse(null);
+        return categoryRepository.getCategoryByName(name)
+                .orElseThrow(() -> new NotFound("Category not found"));
+    }
+
+    public void deleteCategoryById(UUID id) {
+        try {
+            categoryRepository.deleteById(id);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Category not found");
+        }
     }
 }

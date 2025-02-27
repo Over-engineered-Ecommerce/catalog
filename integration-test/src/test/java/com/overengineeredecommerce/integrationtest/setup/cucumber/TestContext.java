@@ -10,4 +10,5 @@ import org.springframework.stereotype.Component;
 @Scope("cucumber-glue")
 public class TestContext {
     private ValidatableResponse response;
+
 }
