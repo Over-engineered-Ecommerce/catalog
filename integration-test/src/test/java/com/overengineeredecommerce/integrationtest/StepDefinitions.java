@@ -37,16 +37,25 @@ public class StepDefinitions extends Postgres {
 
     @Given("a valid request to retrieve all categories")
     public void aValidRequestToRetrieveAllCategories() {
-        log.info("Sending request to retrieve all categories from: {}", baseUrl);
         response = RestAssured.get(baseUrl + "/categories")
                 .then()
                 .statusCode(HttpStatus.OK.value())
                 .contentType(ContentType.JSON);
     }
 
+    @Given("a valid request to get documentation")
+    public void aValidRequestToGetDocumentation() {
+        response = RestAssured.get(baseUrl + "/v3/api-docs" )
+                .then()
+                .statusCode(HttpStatus.OK.value())
+                .contentType(ContentType.JSON);
+
+    }
+
     @Then("the response status should be {int} OK")
     public void theResponseStatusShouldBeOK(int statusCode) {
-        log.info("Verifying response status is {}", statusCode);
         response.statusCode(equalTo(statusCode));
     }
+
+
 }
