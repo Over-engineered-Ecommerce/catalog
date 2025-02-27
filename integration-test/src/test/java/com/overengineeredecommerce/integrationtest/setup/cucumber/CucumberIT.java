@@ -1,4 +1,4 @@
-package com.overengineeredecommerce.integrationtest;
+package com.overengineeredecommerce.integrationtest.setup.cucumber;
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
@@ -10,5 +10,4 @@ import org.junit.runner.RunWith;
         glue = "com.overengineeredecommerce.integrationtest",
         plugin = {"pretty", "html:target/cucumber-reports"}
 )
-public class CucumberIT {
-}
+public class CucumberIT { }
