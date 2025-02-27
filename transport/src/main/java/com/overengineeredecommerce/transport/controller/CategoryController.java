@@ -11,6 +11,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 import java.util.UUID;
 
@@ -53,6 +54,6 @@ public class CategoryController {
         Category category = CategoryMapper.INSTANCE.toCategory(request);
         Category categoryResponse = categoryService.createCategory(category);
 
-        return ResponseEntity.ok(CategoryMapper.INSTANCE.fromCategory(categoryResponse));
+        return ResponseEntity.created(URI.create("")).body(CategoryMapper.INSTANCE.fromCategory(categoryResponse));
     }
 }

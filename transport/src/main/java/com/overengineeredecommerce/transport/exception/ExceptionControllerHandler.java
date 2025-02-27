@@ -25,15 +25,18 @@ public class ExceptionControllerHandler {
     @ExceptionHandler({BindException.class, HttpMessageNotReadableException.class,
             IllegalArgumentException.class, MethodArgumentTypeMismatchException.class,
     })
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
     private ResponseEntity<Map<String, String>> handleIllegalArgumentException(Exception ex, WebRequest request) {
         return ResponseEntity.badRequest().body(mountError(ex));
     }
 
     @ExceptionHandler(value = NoHandlerFoundException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
     private ResponseEntity<Map<String, String>> notFound(Exception ex, WebRequest request) {
         return ResponseEntity.badRequest().body(mountError(ex));
+    }
+
+    @ExceptionHandler(value = UniqueInsertConstraint.class)
+    private ResponseEntity<Map<String, String>> duplication(Exception ex, WebRequest request) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(mountError(ex));
     }
 
     @ExceptionHandler(value = InternalError.class)

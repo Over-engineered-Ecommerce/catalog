@@ -12,8 +12,6 @@ public class CategoryRequestDto {
     @Size(min = 3, max = 100, message = "Please inform a name between 3 and 100 characters.")
     private String name;
 
-
-
     public CategoryRequestDto(String name) {
         this.name = name;
     }
