@@ -49,7 +49,9 @@ public class CategoryStepDefinitions {
 
 
     @Given("a category informática exits")
-    public void aCategoryInformaticaExits() {}
+    public void aCategoryInformaticaExits() {
+        // This method is just a placeholder to make the scenario more readable
+    }
 
     @And("the response should contain {string}")
     public void theResponseShouldContain(String expectedContent) {
