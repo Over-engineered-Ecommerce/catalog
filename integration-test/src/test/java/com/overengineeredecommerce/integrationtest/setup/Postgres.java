@@ -30,7 +30,7 @@ public abstract class Postgres {
     @DynamicPropertySource
     static void registerPgProperties(DynamicPropertyRegistry registry) {
 
-        System.out.println("Postgres container: " + POSTGRESQL_CONTAINER.getJdbcUrl());
+        log.info("Postgres container: {}", POSTGRESQL_CONTAINER.getJdbcUrl());
 
         registry.add("spring.datasource.url", POSTGRESQL_CONTAINER::getJdbcUrl);
         registry.add("spring.datasource.username", POSTGRESQL_CONTAINER::getUsername);
