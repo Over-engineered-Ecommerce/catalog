@@ -13,7 +13,7 @@ public class SharedStepDefinitions {
         this.testContext = testContext;
     }
 
-    @Then("the response status should be {int} OK")
+    @Then("the response status should be {int}")
     public void theResponseStatusShouldBeOK(int statusCode) {
         testContext.getResponse().statusCode(equalTo(statusCode));
     }

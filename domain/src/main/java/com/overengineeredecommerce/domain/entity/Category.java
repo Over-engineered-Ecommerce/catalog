@@ -18,6 +18,7 @@ public final class Category {
     @Column(updatable = false, nullable = false)
     private UUID id;
 
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
 

@@ -2,6 +2,7 @@ package com.overengineeredecommerce.transport.service;
 
 
 import com.overengineeredecommerce.domain.entity.Category;
+import com.overengineeredecommerce.transport.exception.UniqueInsertConstraint;
 import com.overengineeredecommerce.transport.repository.CategoryRepository;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,11 @@ public class CategoryService {
     }
 
     public Category createCategory(Category category) {
-        return categoryRepository.save(category);
+        try {
+            return categoryRepository.save(category);
+        } catch (Exception e) {
+            throw new UniqueInsertConstraint("Category with name '" + category.getName() + "' already exists");
+        }
     }
 
     public Category getCategoryById(UUID id) {
