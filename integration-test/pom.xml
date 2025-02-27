@@ -63,6 +63,13 @@
         </dependency>
 
         <dependency>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <version>5.10.2</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
             <groupId>net.java.dev.jna</groupId>
             <artifactId>jna-platform</artifactId>
             <version>5.15.0</version>
@@ -115,7 +122,11 @@
                 <configuration>
                     <includes>
                         <include>**/*IT.java</include>
+                        <include>**/*Test.java</include>
                     </includes>
+                    <systemPropertyVariables>
+                        <cucumber.junit.execute>true</cucumber.junit.execute>
+                    </systemPropertyVariables>
                 </configuration>
             </plugin>
         </plugins>
