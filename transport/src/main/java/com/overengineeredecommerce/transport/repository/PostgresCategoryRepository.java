@@ -8,8 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 import java.util.UUID;
 
-
 @Repository
-public interface PostgresCategoryRepository extends JpaRepository<Category, UUID> , CategoryRepository {
+public interface PostgresCategoryRepository extends JpaRepository<Category, UUID>, CategoryRepository {
     Optional<Category> getCategoryByName(String name);
 }

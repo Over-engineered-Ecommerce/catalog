@@ -16,7 +16,7 @@ public class CategoryService {
 
     private final CategoryRepository categoryRepository;
 
-    CategoryService(CategoryRepository categoryRepository) {
+    public CategoryService(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
 
