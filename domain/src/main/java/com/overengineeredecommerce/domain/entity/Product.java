@@ -19,7 +19,7 @@ public final class Product {
     @GeneratedValue(generator = "UUID")
     @UuidGenerator
     @Column(updatable = false, nullable = false)
-    private UUID ProductId;
+    private UUID productId;
 
     @Column(name = "name", nullable = false, unique = true)
     private String name;
@@ -44,7 +44,7 @@ public final class Product {
     public Product() {}
 
     public Product(UUID ProductId, String name, String brand, String ean, Map<String, String> details) {
-        this.ProductId = ProductId;
+        this.productId = ProductId;
         this.name = name;
         this.brand = brand;
         this.ean = ean;
@@ -53,11 +53,11 @@ public final class Product {
 
 
     public UUID getProductId() {
-        return ProductId;
+        return productId;
     }
 
     public void setProductId(UUID productId) {
-        ProductId = productId;
+        this.productId = productId;
     }
 
     public String getName() {

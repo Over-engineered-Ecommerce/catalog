@@ -6,17 +6,23 @@ import jakarta.validation.constraints.Size;
 
 public class ProductRequestDto {
 
-    @NotBlank(message = "Please inform the category name.")
-    @NotNull(message = "Please inform the category name.")
+    public static final String PLEASE_INFORM_THE_PRODUCT = "Please inform the Product";
+    public static final String NAME = " name.";
+    public static final String BRAND = " brand.";
+    public static final String EAN = " ean.";
+
+
+    @NotBlank(message = PLEASE_INFORM_THE_PRODUCT + NAME)
+    @NotNull(message = PLEASE_INFORM_THE_PRODUCT + NAME)
     @Size(min = 3, max = 100, message = "Please inform a name between 3 and 100 characters.")
     private String name;
 
-    @NotBlank(message = "Please inform the Product brand.")
-    @NotNull(message = "Please inform the Product brand.")
+    @NotBlank(message = PLEASE_INFORM_THE_PRODUCT + BRAND)
+    @NotNull(message = PLEASE_INFORM_THE_PRODUCT + BRAND)
     private String brand;
 
-    @NotBlank(message = "Please inform the Product ean.")
-    @NotNull(message = "Please inform the Product ean.")
+    @NotBlank(message = PLEASE_INFORM_THE_PRODUCT + EAN)
+    @NotNull(message = PLEASE_INFORM_THE_PRODUCT + EAN)
     private String ean;
 
 
