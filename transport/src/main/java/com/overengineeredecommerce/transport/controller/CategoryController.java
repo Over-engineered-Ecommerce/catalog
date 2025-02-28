@@ -1,7 +1,7 @@
 package com.overengineeredecommerce.transport.controller;
 
 import com.overengineeredecommerce.domain.entity.Category;
-import com.overengineeredecommerce.transport.CategoryMapper;
+import com.overengineeredecommerce.transport.mapper.CategoryMapper;
 import com.overengineeredecommerce.application.service.CategoryService;
 import com.overengineeredecommerce.transport.dto.CategoryRequestDto;
 import io.swagger.v3.oas.annotations.Operation;
