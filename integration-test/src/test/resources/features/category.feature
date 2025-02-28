@@ -5,7 +5,6 @@ Feature: Category
     Then the response status should be 200
 
 
-
   Scenario: Successfully create category
     Given the category "IT & Electronics" does not exist
     When a request is made to create a category called "IT & Electronics"
