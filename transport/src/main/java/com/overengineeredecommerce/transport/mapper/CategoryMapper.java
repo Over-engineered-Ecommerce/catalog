@@ -1,4 +1,4 @@
-package com.overengineeredecommerce.transport;
+package com.overengineeredecommerce.transport.mapper;
 
 
 import com.overengineeredecommerce.domain.entity.Category;
