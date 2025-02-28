@@ -1,4 +1,4 @@
-package com.overengineeredecommerce.transport.exception;
+package com.overengineeredecommerce.application.exception;
 
 public class UniqueInsertConstraint extends RuntimeException {
     public UniqueInsertConstraint(String message) {

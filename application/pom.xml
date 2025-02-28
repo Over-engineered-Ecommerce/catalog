@@ -21,6 +21,11 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>com.Over-engineered-Ecommerce</groupId>
+            <artifactId>domain</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

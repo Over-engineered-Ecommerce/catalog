@@ -23,9 +23,9 @@ This project is a simple e-commerce catalog service that provides a REST API to 
 
 ## Project Structure
 
-- `src/test/java/com/overengineeredecommerce/integrationtest`: Contains the step definitions and test context.
+- `src/test/java/com/overengineeredecommerce/integrationtest`: Contains the integration tests, step definitions, and test context.
 - `src/test/resources/features`: Contains the Cucumber feature files.
-- `Makefile`: Contains commands to manage Docker services.
+- `Makefile`: Contains commands.
 
 ## Running Tests
 
@@ -38,7 +38,21 @@ mvn clean install
 
 The `CucumberIT` class is used to run the Cucumber tests and configure the Spring context. 
 The `TestConfig` class scans for Spring components.
+The `TestContext` class scans for Spring components.
 
 ## License
 
 This project is licensed under the MIT License. See the `LICENSE` file for details.
+
+
+
+## Modules Dependency tree
+
+```mermaid
+graph TD
+    Transport -->|Depends on| Application
+    Application -->|Depends on| Domain
+    Test-Integration -->|Depends on| Transport
+    Test-Integration -->|Depends on| Application
+    Test-Integration -->|Depends on| Domain
+```
