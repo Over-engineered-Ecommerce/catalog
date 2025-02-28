@@ -43,8 +43,8 @@ public final class Product {
 
     public Product() {}
 
-    public Product(UUID ProductId, String name, String brand, String ean, Map<String, String> details) {
-        this.productId = ProductId;
+    public Product(UUID productId, String name, String brand, String ean, Map<String, String> details) {
+        this.productId = productId;
         this.name = name;
         this.brand = brand;
         this.ean = ean;
