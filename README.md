@@ -42,3 +42,16 @@ The `TestConfig` class scans for Spring components.
 ## License
 
 This project is licensed under the MIT License. See the `LICENSE` file for details.
+
+
+
+## Modules Dependency Diagram
+
+```mermaid
+graph TD
+    Transport -->|Depends on| Application
+    Application -->|Depends on| Domain
+    Test-Integration -->|Depends on| Transport
+    Test-Integration -->|Depends on| Application
+    Test-Integration -->|Depends on| Domain
+```

@@ -1,10 +1,9 @@
 package com.overengineeredecommerce.transport.controller;
 
-
 import com.overengineeredecommerce.domain.entity.Category;
 import com.overengineeredecommerce.transport.CategoryMapper;
+import com.overengineeredecommerce.application.service.CategoryService;
 import com.overengineeredecommerce.transport.dto.CategoryRequestDto;
-import com.overengineeredecommerce.transport.service.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;

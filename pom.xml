@@ -15,10 +15,11 @@
     <description>catalog</description>
 
     <packaging>pom</packaging>
+
     <modules>
         <module>domain</module>
-        <module>transport</module>
         <module>application</module>
+        <module>transport</module>
         <module>integration-test</module>
 
     </modules>
@@ -63,8 +64,6 @@
                     <skip>true</skip>
                 </configuration>
             </plugin>
-
-
         </plugins>
     </build>
 

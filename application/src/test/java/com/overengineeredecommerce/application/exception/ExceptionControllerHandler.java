@@ -1,4 +1,4 @@
-package com.overengineeredecommerce.transport.exception;
+package com.overengineeredecommerce.application.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

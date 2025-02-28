@@ -1,10 +1,11 @@
-package com.overengineeredecommerce.transport.service;
+package com.overengineeredecommerce.application.service;
 
 
+
+import com.overengineeredecommerce.application.exception.NotFound;
+import com.overengineeredecommerce.application.exception.UniqueInsertConstraint;
+import com.overengineeredecommerce.application.repository.CategoryRepository;
 import com.overengineeredecommerce.domain.entity.Category;
-import com.overengineeredecommerce.transport.exception.NotFound;
-import com.overengineeredecommerce.transport.exception.UniqueInsertConstraint;
-import com.overengineeredecommerce.transport.repository.CategoryRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;

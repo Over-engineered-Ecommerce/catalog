@@ -58,12 +58,7 @@
 			<artifactId>swagger-ui</artifactId>
 			<version>5.18.2</version>
 		</dependency>
-		<dependency>
-			<groupId>com.Over-engineered-Ecommerce</groupId>
-			<artifactId>domain</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<scope>compile</scope>
-		</dependency>
+
 
 		<!-- MapStruct -->
 		<dependency>
@@ -77,6 +72,21 @@
 			<artifactId>mapstruct-processor</artifactId>
 			<version>${mapstruct.version}</version>
 			<scope>provided</scope>
+		</dependency>
+
+		<!-- Modules -->
+		<dependency>
+			<groupId>com.Over-engineered-Ecommerce</groupId>
+			<artifactId>domain</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
+		<!-- Application module dependency -->
+		<dependency>
+			<groupId>com.Over-engineered-Ecommerce</groupId>
+			<artifactId>application</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>compile</scope>
 		</dependency>
 
 	</dependencies>
