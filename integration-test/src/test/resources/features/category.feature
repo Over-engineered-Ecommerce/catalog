@@ -10,7 +10,6 @@ Feature: Category
     When a request is made to create a category called "IT & Electronics"
     Then the response status should be 201
 
-
   Scenario: Fail to create category with same name
     Given the category "IT & Electronics" exists
     When a request is made to create a category called "IT & Electronics"
@@ -51,3 +50,27 @@ Feature: Category
     Given the category "IT & Electronics" exists
     When a request to delete the category
     Then the response status should be 204
+
+
+  Scenario: Successfully create category
+    Given the category "IT & Electronics" does not exist
+    When a request is made to create a category called "IT & Electronics"
+    Then the response status should be 201
+
+
+  Scenario: Successfully create category
+    Given the category "Skincare & Cosmetics" does not exist
+    When a request is made to create a category called "Skincare & Cosmetics"
+    Then the response status should be 201
+
+  Scenario: Successfully create category
+    Given the category "Kids’ Toys & Games" does not exist
+    When a request is made to create a category called "Kids’ Toys & Games"
+    Then the response status should be 201
+
+  Scenario: Successfully reach categories endpoint
+    Given a valid request is made to retrieve all categories
+    Then the response status should be 200
+    And the response should contain a category "IT & Electronics"
+    And the response should contain a category "Skincare & Cosmetics"
+    And the response should contain a category "Kids’ Toys & Games"

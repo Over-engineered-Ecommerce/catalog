@@ -5,6 +5,12 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+/**
+ * Data transfer object for category requests
+ * <p> This class is responsible for holding the data sent by the client
+ * when creating a new category.
+ * </p>
+ */
 public class CategoryRequestDto {
 
     @NotBlank(message = "Please inform the category name.")
