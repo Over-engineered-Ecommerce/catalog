@@ -27,8 +27,8 @@ public final class Product {
     @Column(name = "brand", nullable = false, unique = true)
     private String brand;
 
-    @Column(name = "ean13", nullable = false, unique = true)
-    private String EAN13;
+    @Column(name = "ean", nullable = false, unique = true)
+    private String ean;
 
     @JdbcTypeCode(SqlTypes.JSON)
     private Map<String, String> details;
@@ -41,14 +41,13 @@ public final class Product {
     private LocalDateTime updatedAt;
 
 
-    public Product() {
-    }
+    public Product() {}
 
-    public Product(UUID ProductId, String name, String brand, String EAN13, Map<String, String> details) {
+    public Product(UUID ProductId, String name, String brand, String ean, Map<String, String> details) {
         this.ProductId = ProductId;
         this.name = name;
         this.brand = brand;
-        this.EAN13 = EAN13;
+        this.ean = ean;
         this.details = details;
     }
 
@@ -77,12 +76,12 @@ public final class Product {
         this.brand = brand;
     }
 
-    public String getEAN13() {
-        return EAN13;
+    public String getEan() {
+        return ean;
     }
 
-    public void setEAN13(String EAN13) {
-        this.EAN13 = EAN13;
+    public void setEan(String ean) {
+        this.ean = ean;
     }
 
     public Map<String, String> getDetails() {

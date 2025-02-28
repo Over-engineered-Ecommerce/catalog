@@ -44,17 +44,18 @@ public class ProductController {
     }
 
     @Operation(
-            summary = "Create a new product",
-            description = "Creates a new product in the system with the provided details",
-            tags = {"Product"}
+        summary = "Create a new product",
+        description = "Creates a new product in the system with the provided details",
+        tags = {"Product"}
     )
     @PostMapping("/product")
     public ResponseEntity<?> createProduct(@RequestBody @Valid ProductRequestDto request) {
         Product product = ProductMapper.INSTANCE.toProduct(request);
+
         Product productResponse = productService.createProduct(product);
 
-        URI location = URI.create("/product?id=" + productResponse.getProductId());
+        URI location = URI.create("");
         return ResponseEntity.created(location)
-                .body(ProductMapper.INSTANCE.fromProduct(productResponse));
+                .body(productResponse );
     }
 }
