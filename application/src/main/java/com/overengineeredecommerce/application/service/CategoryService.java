@@ -41,14 +41,14 @@ public class CategoryService {
 
     public Category getCategoryByName(String name) {
         return categoryRepository.getCategoryByName(name)
-                .orElseThrow(() -> new NotFound("Category not found"));
+                .orElseThrow(() -> new NotFound(CATEGORY_NOT_FOUND));
     }
 
     public void deleteCategoryById(UUID id) {
         try {
             categoryRepository.deleteById(id);
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Category not found");
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT, CATEGORY_NOT_FOUND);
         }
     }
 }
