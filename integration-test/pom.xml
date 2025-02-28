@@ -5,12 +5,12 @@
     <parent>
         <groupId>com.Over-engineered-Ecommerce</groupId>
         <artifactId>catalog</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
 
 
     <artifactId>integration-test</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>${catalog.version}</version>
     <name>integration-test</name>
     <description>integration-test</description>
 
@@ -18,16 +18,27 @@
     <properties>
         <java.version>21</java.version>
         <cucumber.version>7.21.1</cucumber.version>
+        <testcontainers.postgresql.version>1.20.4</testcontainers.postgresql.version>
+        <rest-assured.version>5.5.0</rest-assured.version>
+        <junit-vintage-engine.version>5.11.3</junit-vintage-engine.version>
+        <jna-platform.version>5.15.0</jna-platform.version>
+        <catalog.version>0.0.1-SNAPSHOT</catalog.version>
     </properties>
 
 
     <dependencies>
 
+        <!-- Spring Test -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
         <!-- Test Containers -->
         <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>postgresql</artifactId>
-            <version>1.20.4</version>
+            <version>${testcontainers.postgresql.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -41,7 +52,8 @@
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
-            <version>5.5.0</version>
+            <version>${rest-assured.version}</version>
+            <scope>test</scope>
         </dependency>
 
         <!-- Cucumber -->
@@ -49,11 +61,13 @@
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
             <version>${cucumber.version}</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
             <version>${cucumber.version}</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
@@ -65,28 +79,30 @@
         <dependency>
             <groupId>org.junit.vintage</groupId>
             <artifactId>junit-vintage-engine</artifactId>
-            <version>5.10.2</version>
+            <version>${junit-vintage-engine.version}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>net.java.dev.jna</groupId>
             <artifactId>jna-platform</artifactId>
-            <version>5.15.0</version>
+            <version>${jna-platform.version}</version>
+            <scope>test</scope>
         </dependency>
 
         <!-- Projects -->
         <dependency>
             <groupId>com.Over-engineered-Ecommerce</groupId>
             <artifactId>transport</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${catalog.version}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>com.Over-engineered-Ecommerce</groupId>
             <artifactId>domain</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${catalog.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
