@@ -24,8 +24,7 @@
         <dependency>
             <groupId>com.Over-engineered-Ecommerce</groupId>
             <artifactId>domain</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>test</scope>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 

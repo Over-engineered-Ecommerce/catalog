@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 /**
  * Global exception handler for the application.
- *
+
  * This class handles various exceptions that might occur during request processing
  * and provides appropriate error responses in a consistent format.
  * It uses {@link RestControllerAdvice} to intercept exceptions across all controllers.

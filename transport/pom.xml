@@ -78,15 +78,13 @@
 		<dependency>
 			<groupId>com.Over-engineered-Ecommerce</groupId>
 			<artifactId>domain</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 		</dependency>
-		<!-- Application module dependency -->
 		<dependency>
 			<groupId>com.Over-engineered-Ecommerce</groupId>
 			<artifactId>application</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<scope>compile</scope>
+			<version>${project.version}</version>
 		</dependency>
 
 	</dependencies>

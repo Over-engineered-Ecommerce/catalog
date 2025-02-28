@@ -1,7 +1,5 @@
 package com.overengineeredecommerce.application.service;
 
-
-
 import com.overengineeredecommerce.application.exception.NotFound;
 import com.overengineeredecommerce.application.exception.UniqueInsertConstraint;
 import com.overengineeredecommerce.application.repository.CategoryRepository;
