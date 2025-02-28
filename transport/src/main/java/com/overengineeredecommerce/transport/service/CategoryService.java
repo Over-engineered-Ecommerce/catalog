@@ -34,7 +34,8 @@ public class CategoryService {
     }
 
     public Category getCategoryById(UUID id) {
-        return categoryRepository.getReferenceById(id);
+        return categoryRepository.findById(id)
+                .orElseThrow(() -> new NotFound("Category not found"));
     }
 
     public Category getCategoryByName(String name) {

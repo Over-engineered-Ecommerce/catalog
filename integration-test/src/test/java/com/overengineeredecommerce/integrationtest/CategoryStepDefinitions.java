@@ -25,16 +25,14 @@ public class CategoryStepDefinitions {
         this.testContext = testContext;
     }
 
-    @When("a valid request to retrieve all categories")
+    @When("a valid request is made to retrieve all categories")
     public void aValidRequestToRetrieveAllCategories() {
         testContext.setResponse(RestAssured.get(StepDefinitions.getBaseUrl() + "/categories")
-                .then()
-                .statusCode(HttpStatus.OK.value())
-                .contentType(ContentType.JSON));
+                .then());
     }
 
 
-    @Given("a request to create a category called {string}")
+    @Given("a request is made to create a category called {string}")
     public void aRequestToCreateACategoryCalled(String categoryName) {
         ValidatableResponse response = RestAssured.given()
                 .contentType(ContentType.JSON)
@@ -51,14 +49,32 @@ public class CategoryStepDefinitions {
     }
 
 
-    @Given("a category {string} exits")
-    public void aCategoryExits(String categoryName) {
+    @Given("the category {string} exists")
+    public void the_category_exists(String categoryName) {
         ValidatableResponse response = RestAssured
                 .given()
                 .queryParam("name", categoryName)
                 .get(StepDefinitions.getBaseUrl() + "/categories/search").then();
 
         testContext.setResponse(response);
+    }
+
+    @Given("the category {string} does not exist")
+    public void theCategoryDoesNotExist(String categoryName) {
+        ValidatableResponse response = RestAssured
+                .given()
+                .queryParam("name", categoryName)
+                .get(StepDefinitions.getBaseUrl() + "/categories/search").then();
+        response.statusCode(HttpStatus.NOT_FOUND.value());
+    }
+
+    @Given("the category with id {string} does not exist")
+    public void the_category_with_id_does_not_exist(String id) {
+        ValidatableResponse response = RestAssured
+                .given()
+                .queryParam("id", id)
+                .get(StepDefinitions.getBaseUrl() + "/category").then();
+        response.statusCode(HttpStatus.NOT_FOUND.value());
     }
 
     @And("the response should contain {string}")

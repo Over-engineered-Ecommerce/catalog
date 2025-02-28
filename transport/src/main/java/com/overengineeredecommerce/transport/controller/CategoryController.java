@@ -63,7 +63,6 @@ public class CategoryController {
         return ResponseEntity.noContent().build();
     }
 
-
     @Operation(
             summary = "Retrieves a category by its name",
             description = "Fetches a specific category using its name. The search is case-sensitive.",
