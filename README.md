@@ -1,6 +1,6 @@
-# Overengineered E-commerce Integration Tests
+# Overengineered E-commerce catalog service
 
-This project contains integration tests for the Overengineered E-commerce application. The tests are written using Cucumber and Spring Boot.
+This project is a simple e-commerce catalog service that provides a REST API to manage products and categories.
 
 ## Prerequisites
 
