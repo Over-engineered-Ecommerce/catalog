@@ -56,7 +56,7 @@ public class CategoryStepDefinitions {
         ValidatableResponse response = RestAssured
                 .given()
                 .queryParam("name", categoryName)
-                .get(StepDefinitions.getBaseUrl() + "/category/byName").then();
+                .get(StepDefinitions.getBaseUrl() + "/categories/search").then();
 
         testContext.setResponse(response);
     }
@@ -71,7 +71,7 @@ public class CategoryStepDefinitions {
         Response response = RestAssured
                 .given()
                 .queryParam("name", categoryName)
-                .get(StepDefinitions.getBaseUrl() + "/category/byName");
+                .get(StepDefinitions.getBaseUrl() + "/categories/search");
         testContext.setResponse(response.then());
     }
 
