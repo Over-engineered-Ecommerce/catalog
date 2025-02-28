@@ -1,6 +1,5 @@
 package com.overengineeredecommerce.domain.entity;
 
-
 import jakarta.persistence.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UuidGenerator;
@@ -9,7 +8,6 @@ import org.hibernate.type.SqlTypes;
 import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.UUID;
-
 
 @Entity
 @Table(name = "PRODUCT")
@@ -33,13 +31,11 @@ public final class Product {
     @JdbcTypeCode(SqlTypes.JSON)
     private Map<String, String> details;
 
-
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-
 
     public Product() {}
 
@@ -50,7 +46,6 @@ public final class Product {
         this.ean = ean;
         this.details = details;
     }
-
 
     public UUID getProductId() {
         return productId;
@@ -119,6 +114,4 @@ public final class Product {
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
-
-
 }
