@@ -15,7 +15,7 @@ public class Health {
         this.testContext = testContext;
     }
 
-    @When("the request is made to the {string} endpoint")
+    @When("the get request is made to the {string} endpoint")
     public void aValidRequestToGet(String suffix) {
         ValidatableResponse response = RestAssured.get(StepDefinitions.getBaseUrl() + "/actuator/health" +  suffix)
                 .then()
@@ -23,5 +23,7 @@ public class Health {
                 .contentType(ContentType.JSON);
         testContext.setResponse(response);
     }
+
+
 
 }
