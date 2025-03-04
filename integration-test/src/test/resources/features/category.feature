@@ -15,7 +15,7 @@ Feature: Category
       | categoryName         |  | statusCode |
       | IT & Electronics     |  | 201        |
       | Skincare & Cosmetics |  | 201        |
-      | Kids' Toys & Games   |  | 201        |
+      | Kids` Toys & Games   |  | 201        |
 
 
   Scenario Outline: Fail to create category with invalid name
