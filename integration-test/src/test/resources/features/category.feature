@@ -26,7 +26,11 @@ Feature: Category
     Examples:
       | categoryName | errorMessage                                           |
       | in           | Please inform a name between 3 and 100 characters      |
-      |              | Please inform a name between 3 and 100 characters     |
+      |              | Please inform a name between 3 and 100 characters.    |
+      |              | Please inform a name between 3 and 100 characters.     |
+      |              | Please inform a name between 3 and 100 characters.     |
+      | in           | Please inform a name between 3 and 100 characters      |
+      | in           | Please inform a name between 3 and 100 characters      |
 
 
   Scenario: Successfully get category by name
