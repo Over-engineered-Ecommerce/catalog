@@ -52,10 +52,12 @@ public class ProductController {
     public ResponseEntity<?> createProduct(@RequestBody @Valid ProductRequestDto request) {
         Product product = ProductMapper.INSTANCE.toProduct(request);
 
-        Product productResponse = productService.createProduct(product);
+        Product response = productService.createProduct(product);
 
-        URI location = URI.create("");
+        URI location = URI.create("/category?id=" + response.getProductId());
         return ResponseEntity.created(location)
-                .body(productResponse );
+                .body(ProductMapper.INSTANCE.fromProduct(response));
+
+
     }
 }

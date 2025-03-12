@@ -7,6 +7,8 @@ import io.cucumber.java.en.When;
 import io.restassured.RestAssured;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Map;
+
 @Slf4j
 public class productsStepDefinition {
 
@@ -36,10 +38,14 @@ public class productsStepDefinition {
 
     @When("a request is made to create a product called {string} from the brand {string} with EAN {string}")
     public void aRequestIsMadeToCreateAProductCalled(String productName, String brand, String ean) {
+        Map<String, String> details
+                = Map.of("color", "White", "Device Size", "12 6,1", "Storage", "128GB");
+
+
         testContext.setResponse(RestAssured
                 .given()
                 .contentType("application/json")
-                .body(new ProductRequestDto(productName, brand, ean))
+                .body(new ProductRequestDto(productName, brand, ean, details))
                 .post(StepDefinitions.getBaseUrl() + "/product")
                 .then());
     }

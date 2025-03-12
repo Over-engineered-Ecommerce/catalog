@@ -7,3 +7,4 @@ Feature: Category
     Scenario: Successfully create product
     When a request is made to create a product called "Apple iPhone 12 6,1'' 128GB Blanco" from the brand "Mac" with EAN "0194252031551"
     Then the response status should be 201
+      And the response should contain detail key "color" value "White"

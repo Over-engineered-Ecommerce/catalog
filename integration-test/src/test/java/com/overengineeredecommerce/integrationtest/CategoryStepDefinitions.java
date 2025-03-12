@@ -77,10 +77,6 @@ public class CategoryStepDefinitions {
         response.statusCode(HttpStatus.NOT_FOUND.value());
     }
 
-    @And("the response should contain {string}")
-    public void theResponseShouldContain(String expectedContent) {
-        testContext.getResponse().body(Matchers.containsString(expectedContent));
-    }
 
     @When("a get request category by name called {string}")
     public void aGetRequestCategoryByNameCalled(String categoryName) {

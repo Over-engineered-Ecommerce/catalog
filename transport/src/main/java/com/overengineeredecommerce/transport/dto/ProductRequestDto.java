@@ -3,7 +3,15 @@ package com.overengineeredecommerce.transport.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.Map;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProductRequestDto {
 
     public static final String PLEASE_INFORM_THE_PRODUCT = "Please inform the Product";
@@ -25,36 +33,5 @@ public class ProductRequestDto {
     @NotNull(message = PLEASE_INFORM_THE_PRODUCT + EAN_MESSAGE)
     private String ean;
 
-
-    public ProductRequestDto() {}
-
-    public ProductRequestDto(String name, String brand, String ean) {
-        this.name = name;
-        this.brand = brand;
-        this.ean = ean;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
-    public String getEan() {
-        return ean;
-    }
-
-    public void setEan(String ean) {
-        this.ean = ean;
-    }
+    private Map<String, String> details;
 }
