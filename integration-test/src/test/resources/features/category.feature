@@ -18,7 +18,7 @@ Feature: Category
       | Kids` Toys & Games   |  | 201        |
 
 
-  Scenario Outline: Fail to create category with invalid name
+  Scenario Outline: Fail to create category with invalid name (avoid flakes)
     Given the category "<categoryName>" does not exist
     When a request is made to create a category called "<categoryName>"
     Then the response status should be 400

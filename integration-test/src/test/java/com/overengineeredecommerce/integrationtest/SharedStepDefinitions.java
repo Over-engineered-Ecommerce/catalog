@@ -2,7 +2,6 @@ package com.overengineeredecommerce.integrationtest;
 
 import com.overengineeredecommerce.integrationtest.setup.cucumber.TestContext;
 import com.overengineeredecommerce.transport.dto.ProductResponseDto;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
@@ -28,20 +27,17 @@ public class SharedStepDefinitions {
         testContext.getResponse().statusCode(equalTo(HttpStatus.valueOf(statusCode).value()));
     }
 
-    @And("the response should contain detail key {string} value {string}")
+    @Then("the response should contain detail key {string} value {string}")
     public void theResponseShouldContainDetailKeyValue(String key, String value) {
 
         ProductResponseDto productResponseDto = testContext.getResponse().extract().as(ProductResponseDto.class);
-
-        Assertions.assertEquals(3, productResponseDto.details().size());
         Assertions.assertNotNull(productResponseDto.details().get(key));
         Assertions.assertEquals(value, productResponseDto.details().get(key));
-
-
     }
 
     @Then("the response should contain {string}")
     public void theResponseShouldContain(String expectedContent) {
         testContext.getResponse().body(Matchers.containsString(expectedContent));
     }
+
 }

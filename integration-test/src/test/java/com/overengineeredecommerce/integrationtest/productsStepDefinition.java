@@ -2,10 +2,13 @@ package com.overengineeredecommerce.integrationtest;
 
 import com.overengineeredecommerce.integrationtest.setup.cucumber.TestContext;
 import com.overengineeredecommerce.transport.dto.ProductRequestDto;
+import com.overengineeredecommerce.transport.dto.ProductResponseDto;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.RestAssured;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Assertions;
 
 import java.util.Map;
 
@@ -18,14 +21,7 @@ public class productsStepDefinition {
         this.testContext = testContext;
     }
 
-    @When("a valid request is made to retrieve all products")
-    public void aValidRequestIsMadeToRetrieveAllProducts() {
-        testContext.setResponse(RestAssured
-                .get(StepDefinitions.getBaseUrl() + "/products")
-                .then());
-
-    }
-
+    //GIVEN STEPS
     @Given("the product {string} does not exist")
     public void theProductDoesNotExist(String productName) {
         RestAssured
@@ -36,10 +32,20 @@ public class productsStepDefinition {
                 .statusCode(404);
     }
 
+
+    //WHEN STEPS
+    @When("a valid request is made to retrieve all products")
+    public void aValidRequestIsMadeToRetrieveAllProducts() {
+        testContext.setResponse(RestAssured
+                .get(StepDefinitions.getBaseUrl() + "/products")
+                .then());
+
+    }
+
     @When("a request is made to create a product called {string} from the brand {string} with EAN {string}")
     public void aRequestIsMadeToCreateAProductCalled(String productName, String brand, String ean) {
         Map<String, String> details
-                = Map.of("color", "White", "Device Size", "12 6,1", "Storage", "128GB");
+                = Map.of("color", "White", "Device Size", "6,1", "Storage", "128GB", "version" , "12");
 
 
         testContext.setResponse(RestAssured
@@ -48,5 +54,12 @@ public class productsStepDefinition {
                 .body(new ProductRequestDto(productName, brand, ean, details))
                 .post(StepDefinitions.getBaseUrl() + "/product")
                 .then());
+    }
+
+    //THEN STEPS
+    @Then("the response should contain detail {string} details")
+    public void theResponseShouldContainDetailDetails(String number) {
+        ProductResponseDto productResponseDto = testContext.getResponse().extract().as(ProductResponseDto.class);
+        Assertions.assertEquals(Integer.valueOf(number), productResponseDto.details().size());
     }
 }
