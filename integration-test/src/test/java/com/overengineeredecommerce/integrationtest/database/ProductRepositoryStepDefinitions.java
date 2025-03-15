@@ -28,7 +28,7 @@ public class ProductRepositoryStepDefinitions {
         HashSet<Category> categories = new HashSet<>();
 
         HashMap<String, String> details = new HashMap<>();
-        Product savedProduct = productRepository.save(new Product(null, name, brand, ean, categories, details,  null, null));
+        Product savedProduct = productRepository.save(new Product(null, name, brand, ean, categories, details));
 
         testContext.setProduct(savedProduct);
     }
@@ -38,7 +38,7 @@ public class ProductRepositoryStepDefinitions {
         HashSet<Category> categories = null;
 
         HashMap<String, String> details = new HashMap<>();
-        Product savedProduct = productRepository.save(new Product(null, name, brand, ean, categories, details,  null, null));
+        Product savedProduct = productRepository.save(new Product(null, name, brand, ean, categories, details));
 
         testContext.setProduct(savedProduct);
     }

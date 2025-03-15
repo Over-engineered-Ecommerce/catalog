@@ -7,7 +7,6 @@ import com.overengineeredecommerce.transport.dto.ProductResponseDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.UUID;
@@ -17,12 +16,12 @@ class ProductMapperTest {
     @Test
     void toProduct() {
         HashSet<Category> categories = new HashSet<>();
-        categories.add(new Category(UUID.randomUUID(), "Technology", LocalDateTime.now(), LocalDateTime.now()));
+        categories.add(new Category(UUID.randomUUID(), "Technology"));
         HashMap<String , String > details = new HashMap<>();
         details.put("color", "black");
 
 
-        Product product  = new Product(UUID.randomUUID(), "Phone", "Xiaomi", "7898567779018", categories, details,  LocalDateTime.now(), LocalDateTime.now());
+        Product product  = new Product(UUID.randomUUID(), "Phone", "Xiaomi", "7898567779018", categories, details);
         ProductResponseDto dto = ProductMapper.INSTANCE.fromProduct(product);
         Assertions.assertNotNull(dto);
         Assertions.assertEquals(product.getProductId(), dto.productId());
@@ -40,7 +39,7 @@ class ProductMapperTest {
         HashMap<String , String > details = new HashMap<>();
         details.put("color", "black");
 
-        Product product  = new Product(UUID.randomUUID(), "Phone", "Xiaomi", "7898567779018", categories, details,  LocalDateTime.now(), LocalDateTime.now());
+        Product product  = new Product(UUID.randomUUID(), "Phone", "Xiaomi", "7898567779018", categories, details);
         ProductResponseDto dto = ProductMapper.INSTANCE.fromProduct(product);
         Assertions.assertNotNull(dto);
         Assertions.assertEquals(product.getProductId(), dto.productId());
@@ -56,7 +55,7 @@ class ProductMapperTest {
     void fromProduct() {
 
         HashSet<Category> categories = new HashSet<>();
-        categories.add(new Category(UUID.randomUUID(), "Technology", LocalDateTime.now(), LocalDateTime.now()));
+        categories.add(new Category(UUID.randomUUID(), "Technology"));
         HashMap<String , String > details = new HashMap<>();
         details.put("color", "black");
 

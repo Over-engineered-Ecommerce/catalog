@@ -6,14 +6,13 @@ import com.overengineeredecommerce.transport.dto.CategoryResponseDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 class CategoryMapperTest {
 
     @Test
     void toCategory() {
-        Category category = new Category(UUID.randomUUID(), "Technology", LocalDateTime.now(), LocalDateTime.now());
+        Category category = new Category(UUID.randomUUID(), "Technology");
         CategoryResponseDto dto = CategoryMapper.INSTANCE.fromCategory(category);
         Assertions.assertNotNull(dto);
         Assertions.assertEquals(category.getCategoryId(), dto.categoryId());

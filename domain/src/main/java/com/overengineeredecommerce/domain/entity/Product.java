@@ -1,13 +1,18 @@
 package com.overengineeredecommerce.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UuidGenerator;
 import org.hibernate.type.SqlTypes;
 
-import java.time.LocalDateTime;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 
 @Data
 @Builder
@@ -15,7 +20,7 @@ import java.util.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "PRODUCT")
-public final class Product {
+public final class Product extends BaseEntity {
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -45,21 +50,4 @@ public final class Product {
     @Column(name = "details")
     private Map<String, String> details;
 
-    @Column(name = "created_at", updatable = false, nullable = false)
-    private LocalDateTime createdAt;
-
-    @Column(name = "updated_at", nullable = false)
-    private LocalDateTime updatedAt;
-
-    @PrePersist
-    private void prePersist() {
-        LocalDateTime now = LocalDateTime.now();
-        this.createdAt = now;
-        this.updatedAt = now;
-    }
-
-    @PreUpdate
-    private void preUpdate() {
-        this.updatedAt = LocalDateTime.now();
-    }
 }

@@ -20,7 +20,7 @@ public class CategoryRepositoryStepDefinition {
 
     @When("a category is created with name {string}")
     public void aCategoryIsCreatedWithName(String categoryName) {
-        Category savedCategory = categoryRepository.save(new Category(null, categoryName, null, null));
+        Category savedCategory = categoryRepository.save(new Category(null, categoryName));
         testContext.setCategory(savedCategory);
     }
 
