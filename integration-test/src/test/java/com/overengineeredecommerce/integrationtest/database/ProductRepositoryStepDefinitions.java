@@ -24,33 +24,33 @@ public class ProductRepositoryStepDefinitions {
     }
 
     @When("a Product is created with name {string} and brand {string} and EAN {string}")
-    public void aProductIsCreatedWithNameAndBrandAndEAN(String name, String brand, String EAN) {
+    public void aProductIsCreatedWithNameAndBrandAndEAN(String name, String brand, String ean) {
         HashSet<Category> categories = new HashSet<>();
 
         HashMap<String, String> details = new HashMap<>();
-        Product savedProduct = productRepository.save(new Product(null, name, brand, EAN, categories, details,  null, null));
+        Product savedProduct = productRepository.save(new Product(null, name, brand, ean, categories, details,  null, null));
 
         testContext.setProduct(savedProduct);
     }
 
     @When("a Product is created with name {string} and brand {string} and EAN {string} and null categories")
-    public void aProductIsCreatedWithNameAndBrandAndEANAndNUllCategory(String name, String brand, String EAN) {
+    public void aProductIsCreatedWithNameAndBrandAndEANAndNUllCategory(String name, String brand, String ean) {
         HashSet<Category> categories = null;
 
         HashMap<String, String> details = new HashMap<>();
-        Product savedProduct = productRepository.save(new Product(null, name, brand, EAN, categories, details,  null, null));
+        Product savedProduct = productRepository.save(new Product(null, name, brand, ean, categories, details,  null, null));
 
         testContext.setProduct(savedProduct);
     }
 
     @Then("the result should be a Product with name {string} and brand {string} and EAN {string} and generatedId")
-    public void theResultShouldBeAProductWithNameAndBrandAndEANAndGeneratedId(String name, String brand, String EAN) {
+    public void theResultShouldBeAProductWithNameAndBrandAndEANAndGeneratedId(String name, String brand, String ean) {
 
         Product product = testContext.getProduct();
         Assertions.assertNotNull(product);
         Assertions.assertEquals(name, product.getName());
         Assertions.assertEquals(brand, product.getBrand());
-        Assertions.assertEquals(EAN, product.getEan());
+        Assertions.assertEquals(ean, product.getEan());
 
         Assertions.assertNotNull(product.getProductId());
         Assertions.assertNotNull(product.getCreatedAt());
