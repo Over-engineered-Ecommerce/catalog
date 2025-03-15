@@ -10,12 +10,14 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.http.HttpStatus;
 
 import java.util.UUID;
 
 
+@Slf4j
 public class CategoryStepDefinitions {
 
 
@@ -43,7 +45,7 @@ public class CategoryStepDefinitions {
         try{
             testContext.setCategory(response.extract().as(Category.class));
         } catch (Exception e) {
-
+            log.error("Expected Failed to parse response as Category: {}" , e.getMessage());
         }
         testContext.setResponse(response);
     }
