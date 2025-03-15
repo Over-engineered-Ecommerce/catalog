@@ -4,6 +4,7 @@ import com.overengineeredecommerce.application.service.ProductService;
 import com.overengineeredecommerce.domain.entity.Product;
 import com.overengineeredecommerce.transport.HttpResponse;
 import com.overengineeredecommerce.transport.dto.ProductRequestDto;
+import com.overengineeredecommerce.transport.dto.ProductResponseDto;
 import com.overengineeredecommerce.transport.mapper.ProductMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Controller for product operations
@@ -38,9 +40,9 @@ public class ProductController {
             tags = {"Product"}
     )
     @GetMapping("/products")
-    public ResponseEntity<?> getProducts() {
+    public ResponseEntity<Stream<ProductResponseDto>> getProducts() {
         List<Product> products = productService.getProducts();
-        return ResponseEntity.ok(products);
+        return ResponseEntity.ok(products.stream().map(ProductMapper.INSTANCE::fromProduct));
     }
 
     @Operation(

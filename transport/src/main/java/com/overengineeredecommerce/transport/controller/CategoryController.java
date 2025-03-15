@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 /**
  * Controller for category operations
@@ -36,9 +37,9 @@ public class CategoryController {
             tags = {"Category"}
     )
     @GetMapping("/categories")
-    public ResponseEntity<?> getCategories() {
+    public ResponseEntity<Stream<CategoryResponseDto>> getCategories() {
         List<Category> categories = categoryService.getCategories();
-        return ResponseEntity.ok(categories);
+        return ResponseEntity.ok(categories.stream().map(CategoryMapper.INSTANCE::fromCategory));
     }
 
     @Operation(
