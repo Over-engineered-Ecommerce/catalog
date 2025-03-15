@@ -2,6 +2,7 @@ package com.overengineeredecommerce.transport.controller;
 
 import com.overengineeredecommerce.application.service.ProductService;
 import com.overengineeredecommerce.domain.entity.Product;
+import com.overengineeredecommerce.transport.HttpResponse;
 import com.overengineeredecommerce.transport.dto.ProductRequestDto;
 import com.overengineeredecommerce.transport.mapper.ProductMapper;
 import io.swagger.v3.oas.annotations.Operation;
@@ -48,7 +49,7 @@ public class ProductController {
         tags = {"Product"}
     )
     @PostMapping("/product")
-    public ResponseEntity<?> createProduct(@RequestBody @Valid ProductRequestDto request) {
+    public ResponseEntity<HttpResponse> createProduct(@RequestBody @Valid ProductRequestDto request) {
         Product product = ProductMapper.INSTANCE.toProduct(request);
         Product response = productService.createProduct(product);
 

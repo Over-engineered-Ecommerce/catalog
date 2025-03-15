@@ -1,10 +1,11 @@
 package com.overengineeredecommerce.transport.controller;
 
+import com.overengineeredecommerce.application.service.CategoryService;
 import com.overengineeredecommerce.domain.entity.Category;
+import com.overengineeredecommerce.transport.HttpResponse;
+import com.overengineeredecommerce.transport.dto.CategoryRequestDto;
 import com.overengineeredecommerce.transport.dto.CategoryResponseDto;
 import com.overengineeredecommerce.transport.mapper.CategoryMapper;
-import com.overengineeredecommerce.application.service.CategoryService;
-import com.overengineeredecommerce.transport.dto.CategoryRequestDto;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -46,7 +47,7 @@ public class CategoryController {
             tags = {"Category"}
     )
     @GetMapping("/category")
-    public ResponseEntity<?> getCategoryById(@RequestParam UUID id) {
+    public ResponseEntity<HttpResponse> getCategoryById(@RequestParam UUID id) {
         Category categoryResponse = categoryService.getCategoryById(id);
         CategoryResponseDto categoryResponseDto = CategoryMapper.INSTANCE.fromCategory(categoryResponse);
         return ResponseEntity.ok(categoryResponseDto);
@@ -58,7 +59,7 @@ public class CategoryController {
             tags = {"Category"}
     )
     @GetMapping("/categories/search")
-    public ResponseEntity<?> getCategoryByName(@RequestParam(name = "name") String name) {
+    public ResponseEntity<HttpResponse> getCategoryByName(@RequestParam(name = "name") String name) {
         Category categoryResponse = categoryService.getCategoryByName(name);
         CategoryResponseDto categoryResponseDto = CategoryMapper.INSTANCE.fromCategory(categoryResponse);
         return ResponseEntity.ok(categoryResponseDto);
@@ -71,7 +72,7 @@ public class CategoryController {
             tags = {"Category"}
     )
     @DeleteMapping("/category")
-    public ResponseEntity<?> deleteCategoryById(@RequestParam(name = "id") UUID id) {
+    public ResponseEntity<HttpResponse> deleteCategoryById(@RequestParam(name = "id") UUID id) {
         categoryService.deleteCategoryById(id);
         return ResponseEntity.noContent().build();
     }
@@ -83,7 +84,7 @@ public class CategoryController {
             tags = {"Category"}
     )
     @PostMapping("/category")
-    public ResponseEntity<?> createCategory(@RequestBody @Valid CategoryRequestDto request) {
+    public ResponseEntity<HttpResponse> createCategory(@RequestBody @Valid CategoryRequestDto request) {
         Category category = CategoryMapper.INSTANCE.toCategory(request);
         Category categoryResponse = categoryService.createCategory(category);
 
