@@ -38,8 +38,7 @@ public class ProductController {
     )
     @GetMapping("/products")
     public ResponseEntity<?> getProducts() {
-
-        List<Product> products = productService.getCategories();
+        List<Product> products = productService.getProducts();
         return ResponseEntity.ok(products);
     }
 
@@ -52,6 +51,9 @@ public class ProductController {
     public ResponseEntity<?> createProduct(@RequestBody @Valid ProductRequestDto request) {
         Product product = ProductMapper.INSTANCE.toProduct(request);
 
+        if(product.getCategories().isEmpty()) {
+            product.setCategories(null);
+        }
         Product response = productService.createProduct(product);
 
         URI location = URI.create("/category?id=" + response.getProductId());

@@ -4,6 +4,7 @@ import com.overengineeredecommerce.application.exception.NotFound;
 import com.overengineeredecommerce.application.exception.UniqueInsertConstraint;
 import com.overengineeredecommerce.application.repository.CategoryRepository;
 import com.overengineeredecommerce.domain.entity.Category;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -29,8 +30,10 @@ public class CategoryService {
     public Category createCategory(Category category) {
         try {
             return categoryRepository.save(category);
-        } catch (Exception e) {
+        } catch (DataIntegrityViolationException e) {
             throw new UniqueInsertConstraint("Category with name '" + category.getName() + "' already exists");
+        } catch (Exception e) {
+            throw new UniqueInsertConstraint("Error creating category + " + category.getName());
         }
     }
 

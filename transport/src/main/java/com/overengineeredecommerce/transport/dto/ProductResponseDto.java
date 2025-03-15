@@ -1,6 +1,9 @@
 package com.overengineeredecommerce.transport.dto;
 
+import com.overengineeredecommerce.domain.entity.Category;
+
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
-public record ProductResponseDto(UUID id, String name, String brand, String ean, Map<String, String> details) { }
+public record ProductResponseDto(UUID productId, String name, String brand, String ean, Set<Category> categories, Map<String, String> details) { }

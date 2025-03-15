@@ -11,6 +11,7 @@ import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Assertions;
 import org.springframework.http.HttpStatus;
 
 import java.util.UUID;
@@ -56,6 +57,9 @@ public class CategoryStepDefinitions {
                 .queryParam("name", categoryName)
                 .get(StepDefinitions.getBaseUrl() + "/categories/search").then();
 
+        CategoryResponseDto responseDto = response.extract().as(CategoryResponseDto.class);
+
+        Assertions.assertEquals(categoryName, responseDto.name());
         testContext.setResponse(response);
     }
 
@@ -98,7 +102,7 @@ public class CategoryStepDefinitions {
 
     @When("a request to delete the category")
     public void aRequestToDeleteTheCategory() {
-        UUID id = testContext.getResponse().extract().as(CategoryResponseDto.class).id();
+        UUID id = testContext.getResponse().extract().as(CategoryResponseDto.class).categoryId();
 
         ValidatableResponse response = RestAssured
                 .given()

@@ -1,5 +1,6 @@
 package com.overengineeredecommerce.integrationtest;
 
+import com.overengineeredecommerce.domain.entity.Category;
 import com.overengineeredecommerce.integrationtest.setup.cucumber.TestContext;
 import com.overengineeredecommerce.transport.dto.ProductRequestDto;
 import com.overengineeredecommerce.transport.dto.ProductResponseDto;
@@ -10,6 +11,7 @@ import io.restassured.RestAssured;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 
+import java.util.HashSet;
 import java.util.Map;
 
 @Slf4j
@@ -46,12 +48,12 @@ public class productsStepDefinition {
     public void aRequestIsMadeToCreateAProductCalled(String productName, String brand, String ean) {
         Map<String, String> details
                 = Map.of("color", "White", "Device Size", "6,1", "Storage", "128GB", "version" , "12");
-
+        HashSet<Category> categories = new HashSet<>();
 
         testContext.setResponse(RestAssured
                 .given()
                 .contentType("application/json")
-                .body(new ProductRequestDto(productName, brand, ean, details))
+                .body(new ProductRequestDto(productName, brand, ean, categories, details))
                 .post(StepDefinitions.getBaseUrl() + "/product")
                 .then());
     }

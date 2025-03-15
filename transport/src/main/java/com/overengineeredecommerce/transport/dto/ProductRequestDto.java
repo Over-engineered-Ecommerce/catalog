@@ -1,5 +1,6 @@
 package com.overengineeredecommerce.transport.dto;
 
+import com.overengineeredecommerce.domain.entity.Category;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -7,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
 import java.util.Map;
 
 @Data
@@ -33,5 +35,8 @@ public class ProductRequestDto {
     @NotNull(message = PLEASE_INFORM_THE_PRODUCT + EAN_MESSAGE)
     private String ean;
 
+    private HashSet<Category> categories;
+
     private Map<String, String> details;
+
 }

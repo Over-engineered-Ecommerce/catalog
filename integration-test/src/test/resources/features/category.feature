@@ -4,6 +4,7 @@ Feature: Category
     When a valid request is made to retrieve all categories
     Then the response status should be 200
 
+
   Scenario Outline: Create categories
     Given the category "<categoryName>" does not exist
     When a request is made to create a category called "<categoryName>"

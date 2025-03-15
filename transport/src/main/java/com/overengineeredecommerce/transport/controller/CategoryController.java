@@ -1,6 +1,7 @@
 package com.overengineeredecommerce.transport.controller;
 
 import com.overengineeredecommerce.domain.entity.Category;
+import com.overengineeredecommerce.transport.dto.CategoryResponseDto;
 import com.overengineeredecommerce.transport.mapper.CategoryMapper;
 import com.overengineeredecommerce.application.service.CategoryService;
 import com.overengineeredecommerce.transport.dto.CategoryRequestDto;
@@ -35,7 +36,6 @@ public class CategoryController {
     )
     @GetMapping("/categories")
     public ResponseEntity<?> getCategories() {
-
         List<Category> categories = categoryService.getCategories();
         return ResponseEntity.ok(categories);
     }
@@ -48,8 +48,22 @@ public class CategoryController {
     @GetMapping("/category")
     public ResponseEntity<?> getCategoryById(@RequestParam UUID id) {
         Category categoryResponse = categoryService.getCategoryById(id);
-        return ResponseEntity.ok(CategoryMapper.INSTANCE.fromCategory(categoryResponse));
+        CategoryResponseDto categoryResponseDto = CategoryMapper.INSTANCE.fromCategory(categoryResponse);
+        return ResponseEntity.ok(categoryResponseDto);
     }
+
+    @Operation(
+            summary = "Retrieves a category by its name",
+            description = "Fetches a specific category using its name. The search is case-sensitive.",
+            tags = {"Category"}
+    )
+    @GetMapping("/categories/search")
+    public ResponseEntity<?> getCategoryByName(@RequestParam(name = "name") String name) {
+        Category categoryResponse = categoryService.getCategoryByName(name);
+        CategoryResponseDto categoryResponseDto = CategoryMapper.INSTANCE.fromCategory(categoryResponse);
+        return ResponseEntity.ok(categoryResponseDto);
+    }
+
 
     @Operation(
             summary = "Deletes a category by its ID",
@@ -62,16 +76,6 @@ public class CategoryController {
         return ResponseEntity.noContent().build();
     }
 
-    @Operation(
-            summary = "Retrieves a category by its name",
-            description = "Fetches a specific category using its name. The search is case-sensitive.",
-            tags = {"Category"}
-    )
-    @GetMapping("/categories/search")
-    public ResponseEntity<?> getCategoryByName(@RequestParam(name = "name") String name) {
-        Category categoryResponse = categoryService.getCategoryByName(name);
-        return ResponseEntity.ok(CategoryMapper.INSTANCE.fromCategory(categoryResponse));
-    }
 
     @Operation(
             summary = "Create a new category",
@@ -83,7 +87,7 @@ public class CategoryController {
         Category category = CategoryMapper.INSTANCE.toCategory(request);
         Category categoryResponse = categoryService.createCategory(category);
 
-        URI location = URI.create("/category?id=" + categoryResponse.getId());
+        URI location = URI.create("/category?id=" + categoryResponse.getCategoryId());
         return ResponseEntity.created(location)
                 .body(CategoryMapper.INSTANCE.fromCategory(categoryResponse));
     }

@@ -22,7 +22,7 @@ public final class Category {
     @GeneratedValue(generator = "UUID")
     @UuidGenerator
     @Column(updatable = false, nullable = false)
-    private UUID id;
+    private UUID categoryId;
 
     @Column(name = "name", nullable = false, unique = true)
     private String name;
@@ -32,8 +32,6 @@ public final class Category {
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-
-
 
 
     @PrePersist
@@ -46,7 +44,7 @@ public final class Category {
     @Override
     public String toString() {
         return "Category{" +
-                "id=" + id +
+                "categoryId=" + categoryId +
                 ", name='" + name + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
