@@ -1,16 +1,15 @@
 package com.overengineeredecommerce.integrationtest;
 
+import com.overengineeredecommerce.domain.entity.Category;
 import com.overengineeredecommerce.integrationtest.setup.cucumber.TestContext;
 import com.overengineeredecommerce.transport.dto.CategoryRequestDto;
 import com.overengineeredecommerce.transport.dto.CategoryResponseDto;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.http.HttpStatus;
 
@@ -41,12 +40,12 @@ public class CategoryStepDefinitions {
                 .post(StepDefinitions.getBaseUrl() + "/category")
                 .then();
 
-        testContext.setResponse(response);
-    }
+        try{
+            testContext.setCategory(response.extract().as(Category.class));
+        } catch (Exception e) {
 
-    @And("the response should contain a category {string}")
-    public void theResponseShouldContainTheCategory(String category) {
-        testContext.getResponse().body("find { it.name == '" + category + "' }.name", Matchers.equalTo(category));
+        }
+        testContext.setResponse(response);
     }
 
 
@@ -109,5 +108,11 @@ public class CategoryStepDefinitions {
                 .queryParam("id", id)
                 .delete(StepDefinitions.getBaseUrl() + "/category").then();
         testContext.setResponse(response);
+    }
+
+
+    @Given("a category with name {string} exists")
+    public void aCategoryWithNameExists(String categoryName) {
+        aRequestToCreateACategoryCalled(categoryName);
     }
 }

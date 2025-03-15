@@ -37,7 +37,7 @@ public final class Product extends BaseEntity {
     @Column(name = "ean", nullable = false, unique = true)
     private String ean;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE})
     @JoinTable(
             name = "product_category",
             joinColumns = @JoinColumn(name = "product_id"),

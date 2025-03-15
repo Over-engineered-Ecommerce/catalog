@@ -23,3 +23,11 @@ Feature: Category
     Then the response status should be 200
     And the response should be a list of size 1
 
+
+  Scenario: Successfully create product with category
+    Given a category with name "Smartphones" exists
+    When a request is made to create a product with category
+    Then the response status should be 201
+    And the product should contain a category "Smartphones"
+
+

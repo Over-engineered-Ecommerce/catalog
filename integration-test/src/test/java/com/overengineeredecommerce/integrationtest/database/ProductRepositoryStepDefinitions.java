@@ -62,4 +62,6 @@ public class ProductRepositoryStepDefinitions {
         Product product = testContext.getProduct();
         productRepository.deleteById(product.getProductId());
     }
+
+
 }
