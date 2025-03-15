@@ -1,19 +1,16 @@
 package com.overengineeredecommerce.domain.entity;
 
-
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "CATEGORY")
 public final class Category {
@@ -21,33 +18,27 @@ public final class Category {
     @Id
     @GeneratedValue(generator = "UUID")
     @UuidGenerator
-    @Column(updatable = false, nullable = false)
+    @Column(name = "category_id", updatable = false, nullable = false)
     private UUID categoryId;
 
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-    @Column(name = "created_at", updatable = false)
+    @Column(name = "created_at", updatable = false, nullable = false)
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at")
+    @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
 
-
     @PrePersist
-    public void prePersist() {
+    private void prePersist() {
         LocalDateTime now = LocalDateTime.now();
-        this.setCreatedAt(now);
-        this.setUpdatedAt(now);
+        this.createdAt = now;
+        this.updatedAt = now;
     }
 
-    @Override
-    public String toString() {
-        return "Category{" +
-                "categoryId=" + categoryId +
-                ", name='" + name + '\'' +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                '}';
+    @PreUpdate
+    private void preUpdate() {
+        this.updatedAt = LocalDateTime.now();
     }
 }

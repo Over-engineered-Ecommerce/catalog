@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 @Data
-@ToString
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
