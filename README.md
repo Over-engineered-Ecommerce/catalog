@@ -56,3 +56,15 @@ graph TD
     Test-Integration -->|Depends on| Application
     Test-Integration -->|Depends on| Domain
 ```
+
+```mermaid
+   sequenceDiagram
+   Controller->>OpenSearch: Return results
+   activate OpenSearch
+   OpenSearch->>Postgresql: Find products by id related to the search
+   deactivate OpenSearch
+   activate Postgresql
+   Postgresql->>Controller: Return product
+   deactivate Postgresql
+      
+```

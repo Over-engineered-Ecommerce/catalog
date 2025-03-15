@@ -44,6 +44,12 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok-mapstruct-binding</artifactId>
+            <version>0.2.0</version>
+        </dependency>
+
     </dependencies>
 
     <!-- SKIP Spring Boot Maven Plugin -->
@@ -58,5 +64,6 @@
             </plugin>
         </plugins>
     </build>
+
 
 </project>

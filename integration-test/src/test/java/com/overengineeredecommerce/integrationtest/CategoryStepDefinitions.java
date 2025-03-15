@@ -1,21 +1,23 @@
 package com.overengineeredecommerce.integrationtest;
 
+import com.overengineeredecommerce.domain.entity.Category;
 import com.overengineeredecommerce.integrationtest.setup.cucumber.TestContext;
 import com.overengineeredecommerce.transport.dto.CategoryRequestDto;
 import com.overengineeredecommerce.transport.dto.CategoryResponseDto;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
-import org.hamcrest.Matchers;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Assertions;
 import org.springframework.http.HttpStatus;
 
 import java.util.UUID;
 
 
+@Slf4j
 public class CategoryStepDefinitions {
 
 
@@ -40,12 +42,12 @@ public class CategoryStepDefinitions {
                 .post(StepDefinitions.getBaseUrl() + "/category")
                 .then();
 
+        try{
+            testContext.setCategory(response.extract().as(Category.class));
+        } catch (Exception e) {
+            log.error("Expected Failed to parse response as Category: {}" , e.getMessage());
+        }
         testContext.setResponse(response);
-    }
-
-    @And("the response should contain a category {string}")
-    public void theResponseShouldContainTheCategory(String category) {
-        testContext.getResponse().body("find { it.name == '" + category + "' }.name", Matchers.equalTo(category));
     }
 
 
@@ -56,6 +58,9 @@ public class CategoryStepDefinitions {
                 .queryParam("name", categoryName)
                 .get(StepDefinitions.getBaseUrl() + "/categories/search").then();
 
+        CategoryResponseDto responseDto = response.extract().as(CategoryResponseDto.class);
+
+        Assertions.assertEquals(categoryName, responseDto.name());
         testContext.setResponse(response);
     }
 
@@ -77,10 +82,6 @@ public class CategoryStepDefinitions {
         response.statusCode(HttpStatus.NOT_FOUND.value());
     }
 
-    @And("the response should contain {string}")
-    public void theResponseShouldContain(String expectedContent) {
-        testContext.getResponse().body(Matchers.containsString(expectedContent));
-    }
 
     @When("a get request category by name called {string}")
     public void aGetRequestCategoryByNameCalled(String categoryName) {
@@ -102,12 +103,18 @@ public class CategoryStepDefinitions {
 
     @When("a request to delete the category")
     public void aRequestToDeleteTheCategory() {
-        UUID id = testContext.getResponse().extract().as(CategoryResponseDto.class).id();
+        UUID id = testContext.getResponse().extract().as(CategoryResponseDto.class).categoryId();
 
         ValidatableResponse response = RestAssured
                 .given()
                 .queryParam("id", id)
                 .delete(StepDefinitions.getBaseUrl() + "/category").then();
         testContext.setResponse(response);
+    }
+
+
+    @Given("a category with name {string} exists")
+    public void aCategoryWithNameExists(String categoryName) {
+        aRequestToCreateACategoryCalled(categoryName);
     }
 }

@@ -1,7 +1,7 @@
 package com.overengineeredecommerce.integrationtest;
 
 import com.overengineeredecommerce.integrationtest.setup.cucumber.TestContext;
-import io.cucumber.java.en.Given;
+import io.cucumber.java.en.When;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
@@ -15,13 +15,15 @@ public class Health {
         this.testContext = testContext;
     }
 
-    @Given("a valid request to get health {string}")
-    public void aValidRequestToGetHealth(String suffix) {
-
+    @When("the get request is made to the {string} endpoint")
+    public void aValidRequestToGet(String suffix) {
         ValidatableResponse response = RestAssured.get(StepDefinitions.getBaseUrl() + "/actuator/health" +  suffix)
                 .then()
                 .statusCode(HttpStatus.OK.value())
                 .contentType(ContentType.JSON);
         testContext.setResponse(response);
     }
+
+
+
 }
