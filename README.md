@@ -40,9 +40,6 @@ The `CucumberIT` class is used to run the Cucumber tests and configure the Sprin
 The `TestConfig` class scans for Spring components.
 The `TestContext` class scans for Spring components.
 
-## License
-
-This project is licensed under the MIT License. See the `LICENSE` file for details.
 
 
 
@@ -68,3 +65,8 @@ graph TD
    deactivate Postgresql
       
 ```
+
+## License
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
+
